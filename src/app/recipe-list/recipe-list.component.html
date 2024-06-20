@@ -1,0 +1,40 @@
+<ul>
+    @for (recipe of recipes; track recipe) {
+        <li (click)="onRecipeSelected(recipe)">{{ recipe }}</li>
+    }
+</ul>
+
+<br/>
+
+@if (focusedRecipe) {
+    <h2>{{ focusedRecipe.name }}</h2>
+    @for (tag of focusedRecipe.tags; track tag) {
+        {{ tag }}&emsp;
+    }
+    <h3>Ingredients</h3>
+    <table>
+        @for (ingredient of focusedRecipe.ingredients; track ingredient.name) {
+            <tr>
+                <td>{{ ingredient.amount }}</td>
+                <td>{{ ingredient.unit }}</td>
+                <td>{{ ingredient.name }}</td>
+            </tr>
+        }
+    </table>
+    <h3>Instructions</h3>
+    <ol>
+        @for (instruction of focusedRecipe.instructions; track instruction) {
+            <li>{{ instruction }}</li>
+        }
+    </ol>
+    @if (focusedRecipe.notes) {
+        <h3>Notes</h3>
+        <ul>
+            @for (note of focusedRecipe.notes; track note) {
+                <li>{{ note }}</li>
+            }
+        </ul>
+    }
+} @else {
+    <h2>Select a recipe</h2>
+}
